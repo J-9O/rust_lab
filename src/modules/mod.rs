@@ -1,3 +1,2 @@
 pub mod hello;
-
-pub mod cli;
+pub mod cli_tools;

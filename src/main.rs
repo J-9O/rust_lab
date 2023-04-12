@@ -1,18 +1,16 @@
-use clap::Parser;
-
 mod modules;
-use crate::modules::cli::CliError;
 use crate::modules::hello;
-use crate::modules::cli;
+use crate::modules::cli_tools::cli;
+use cli::Cli as Cli;
 
 fn main() -> Result<(), cli::CliError> {
     hello::hello();
-    /* Function snippet for parsing input via the command line */
-    let args = cli::Cli::parse();
+    //let args: Cli = Cli::parse();
 
-    let content = std::fs::read_to_string(&args.path)
-        .map_err(|err| CliError(format!("Error reading: `{:?}`: {}", &args.path, err)))?;
+    Cli::run()
+}
 
-    println!("{}", content);
-    Ok(())
+#[test]
+fn check_answer_validity() {
+    assert_eq!(42, 42);
 }
