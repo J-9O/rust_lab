@@ -1,13 +1,18 @@
 mod modules;
 use crate::modules::hello;
-use crate::modules::cli_tools::cli;
-use cli::Cli as Cli;
+use crate::modules::cli_tools::cli::{Cli, CliError};
+use crate::modules::reqwest_mod::ReqwestMod;
 
-fn main() -> Result<(), cli::CliError> {
-    hello::hello();
+#[tokio::main]
+async fn main() {
+    //hello::hello();
     //let args: Cli = Cli::parse();
-
-    Cli::run()
+    //Cli::run()
+    let result = ReqwestMod::run().await;
+    println!("Result: {:?}", result);
+    
+    let status_code = ReqwestMod::status_code(&result);
+    println!("Status Code: {:?}", status_code);
 }
 
 #[test]
